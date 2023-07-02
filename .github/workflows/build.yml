@@ -20,10 +20,12 @@ jobs:
       with:
         go-version: 1.19
 
+    - name: Prep dir
+      run: mkdir -p bin
+
     - name: Build Gitleaks
       run: |
         git clone https://github.com/gitleaks/gitleaks.git
-        mkdir bin
         cd gitleaks
         make build
         cp gitleaks ../bin/  
@@ -35,5 +37,5 @@ jobs:
         git config --local user.name "github-actions[bot]"
         git pull --rebase
         git add -f bin/gitleaks
-        git commit -m "Add built gitleaks binary" || exit 0
+        git diff-index --quiet HEAD || git commit -m "Add built gitleaks binary"
         git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{github.ref}}
