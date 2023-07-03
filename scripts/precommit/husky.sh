@@ -9,10 +9,13 @@ else
     echo "No subdirectory found in /workspaces"
 fi
 
-# Setting husky
-npx husky-init && npm install
-echo '#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-gitleaks protect --staged' > .husky/pre-commit
-chmod +x .husky/pre-commit 
+# Setting pre-commit
+pip install --upgrade pip
+pip install pre-commit
+echo 'repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.17.0
+    hooks:
+      - id: gitleaks' > .husky/pre-commit
+pre-commit autoupdate
+pre-commit install
