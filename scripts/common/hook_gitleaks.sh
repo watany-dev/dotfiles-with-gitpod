@@ -10,6 +10,9 @@ else
     echo "No subdirectory found in $TARGET_DIR"
 fi
 
+# Install gitleaks
+brew install gitleaks
+
 # Setting pre-commit
 pip install --upgrade pip
 pip install pre-commit
@@ -20,3 +23,4 @@ echo 'repos:
       - id: gitleaks' > .pre-commit-config.yaml
 pre-commit autoupdate
 pre-commit install
+echo ".pre-commit-config.yaml" >> .gitignore
