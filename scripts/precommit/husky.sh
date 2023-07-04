@@ -16,6 +16,6 @@ echo 'repos:
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.17.0
     hooks:
-      - id: gitleaks' > .husky/pre-commit
+      - id: gitleaks' > .pre-commit-config.yaml
 pre-commit autoupdate
 pre-commit install
