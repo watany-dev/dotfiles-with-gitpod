@@ -23,4 +23,3 @@ echo 'repos:
       - id: gitleaks' > .pre-commit-config.yaml
 pre-commit autoupdate
 pre-commit install
-echo ".pre-commit-config.yaml" >> .gitignore
