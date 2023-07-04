@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # move work dirctory
-subdir=$(find /workspaces -maxdepth 1 -mindepth 1 -type d | head -n 1)
+TARGET_DIR='/workspace'
+subdir=$(find "$TARGET_DIR" -maxdepth 1 -mindepth 1 -type d ! -name ".*" | head -n 1)
 if [ -d "$subdir" ]; then
     cd "$subdir"
     echo "Moved to: $(pwd)"
 else
-    echo "No subdirectory found in /workspaces"
+    echo "No subdirectory found in $TARGET_DIR"
 fi
 
 # Setting pre-commit
