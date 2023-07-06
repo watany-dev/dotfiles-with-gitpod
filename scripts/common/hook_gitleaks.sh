@@ -11,7 +11,21 @@ else
 fi
 
 # Install gitleaks
-brew install gitleaks
+copy_prepared_gitleaks_binary() {
+    echo "Copying the prepared gitleaks binary to a location in the PATH..."
+    sudo cp /home/gitpod/.dotfiles/bin/gitleaks /usr/local/bin/gitleaks
+    sudo chmod +x /usr/local/bin/gitleaks
+    echo "Gitleaks binary copied to /usr/local/bin/gitleaks"
+}
+
+if command -v brew &> /dev/null; then
+    echo "Installing gitleaks using Homebrew..."
+    if ! brew install gitleaks; then
+        copy_prepared_gitleaks_binary
+    fi
+else
+    copy_prepared_gitleaks_binary
+fi
 
 # Setting pre-commit
 pip install --upgrade pip
