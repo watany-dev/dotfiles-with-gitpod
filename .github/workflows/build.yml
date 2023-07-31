@@ -35,7 +35,14 @@ jobs:
         git config core.filemode false
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
+        
+        # Stash changes before rebasing
+        git stash
         git pull --rebase
+        
+        # Apply stashed changes after rebasing
+        git stash pop        
         git add -f bin/gitleaks
         git diff-index --quiet HEAD || git commit -m "Add built gitleaks binary"
         git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{github.ref}}
+
